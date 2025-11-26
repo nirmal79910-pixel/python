@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %}Life in Weeks - Portfolio Tools{% endblock %}
+
+{% block content %}
+<section class="tool-page">
+    <div class="tool-header">
+        <h1>Life in Weeks</h1>
+        <p>Visualize your life as weeks. A powerful reminder that time is our most precious resource.</p>
+    </div>
+
+    <div class="calculator-container">
+        <form method="POST" class="calculator-form" id="life-form">
+            <div class="form-group">
+                <label>Choose Input Type</label>
+                <div class="toggle-group">
+                    <input type="radio" id="input-age" name="input_type" value="age" checked>
+                    <label for="input-age" class="toggle-btn">Current Age</label>
+                    <input type="radio" id="input-dob" name="input_type" value="dob">
+                    <label for="input-dob" class="toggle-btn">Date of Birth</label>
+                </div>
+            </div>
+
+            <div class="form-group" id="age-input">
+                <label for="age">Your Current Age</label>
+                <input type="number" id="age" name="age" placeholder="Enter your age" min="0" max="120">
+            </div>
+
+            <div class="form-group hidden" id="dob-input">
+                <label for="dob">Your Date of Birth</label>
+                <input type="date" id="dob" name="dob">
+            </div>
+
+            <button type="submit" class="submit-btn">
+                Calculate My Weeks
+                <span class="btn-shine"></span>
+            </button>
+        </form>
+
+        {% if result %}
+            {% if result.error %}
+                <div class="result-card error">
+                    <p>{{ result.error }}</p>
+                </div>
+            {% else %}
+                <div class="life-results">
+                    <div class="life-stats">
+                        <div class="stat-card">
+                            <span class="stat-value">{{ result.age }}</span>
+                            <span class="stat-label">Years Old</span>
+                        </div>
+                        <div class="stat-card highlight">
+                            <span class="stat-value">{{ "{:,}".format(result.weeks_lived) }}</span>
+                            <span class="stat-label">Weeks Lived</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-value">{{ "{:,}".format(result.weeks_left) }}</span>
+                            <span class="stat-label">Weeks Left</span>
+                        </div>
+                    </div>
+
+                    <div class="progress-container">
+                        <div class="progress-header">
+                            <span>Life Progress (Based on 90-year lifespan)</span>
+                            <span class="progress-percent">{{ result.percentage }}%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: {{ result.percentage }}%"></div>
+                        </div>
+                        <div class="progress-footer">
+                            <span>{{ result.years_left }} years remaining</span>
+                        </div>
+                    </div>
+
+                    <div class="weeks-visualization">
+                        <h3>Your Life in Weeks</h3>
+                        <p class="viz-description">Each box represents one week. <span class="lived-indicator"></span> Weeks lived <span class="left-indicator"></span> Weeks remaining</p>
+                        <div class="weeks-grid" id="weeks-grid" 
+                             data-lived="{{ result.weeks_lived }}" 
+                             data-total="{{ result.total_weeks }}">
+                        </div>
+                    </div>
+
+                    <div class="motivation-card">
+                        <blockquote>
+                            "The trouble is, you think you have time."
+                            <cite>- Buddha</cite>
+                        </blockquote>
+                        <p>Make every week count. You have <strong>{{ "{:,}".format(result.weeks_left) }} weeks</strong> to pursue your dreams, build relationships, and create lasting memories.</p>
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const weeksGrid = document.getElementById('weeks-grid');
+    if (weeksGrid) {
+        const weeksLived = parseInt(weeksGrid.dataset.lived);
+        const totalWeeks = parseInt(weeksGrid.dataset.total);
+        
+        const displayWeeks = Math.min(totalWeeks, 4680);
+        const ratio = totalWeeks / displayWeeks;
+        const livedDisplay = Math.floor(weeksLived / ratio);
+        
+        let html = '';
+        for (let i = 0; i < displayWeeks; i++) {
+            const isLived = i < livedDisplay;
+            html += `<div class="week-box ${isLived ? 'lived' : 'remaining'}"></div>`;
+        }
+        weeksGrid.innerHTML = html;
+    }
+});
+</script>
+{% endblock %}

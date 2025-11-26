@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}BMI Calculator - Portfolio Tools{% endblock %}
+
+{% block content %}
+<section class="tool-page">
+    <div class="tool-header">
+        <h1>BMI Calculator</h1>
+        <p>Calculate your Body Mass Index and understand where you stand on the health scale.</p>
+    </div>
+
+    <div class="calculator-container">
+        <form method="POST" class="calculator-form" id="bmi-form">
+            <div class="form-group">
+                <label for="weight">Weight (kg)</label>
+                <input type="number" id="weight" name="weight" placeholder="Enter your weight" step="0.1" min="1" max="500" required>
+            </div>
+
+            <div class="form-group">
+                <label for="height">Height</label>
+                <div class="input-with-select">
+                    <input type="number" id="height" name="height" placeholder="Enter your height" step="0.01" min="1" required>
+                    <select name="height_unit" id="height_unit">
+                        <option value="cm">cm</option>
+                        <option value="m">m</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                Calculate BMI
+                <span class="btn-shine"></span>
+            </button>
+        </form>
+
+        {% if result %}
+            {% if result.error %}
+                <div class="result-card error">
+                    <p>{{ result.error }}</p>
+                </div>
+            {% else %}
+                <div class="result-card bmi-result {{ result.color }}">
+                    <div class="result-main">
+                        <span class="result-label">Your BMI</span>
+                        <span class="result-value">{{ result.bmi }}</span>
+                    </div>
+                    <div class="result-category">
+                        <span class="category-badge {{ result.color }}">{{ result.category }}</span>
+                    </div>
+                    <div class="bmi-scale">
+                        <div class="scale-bar">
+                            <div class="scale-indicator" style="left: {{ [[(result.bmi - 10) / 35 * 100, 0] | max, 100] | min }}%"></div>
+                        </div>
+                        <div class="scale-labels">
+                            <span>Underweight<br>&lt;18.5</span>
+                            <span>Normal<br>18.5-24.9</span>
+                            <span>Overweight<br>25-29.9</span>
+                            <span>Obese<br>&gt;30</span>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+
+        <div class="info-card">
+            <h3>Understanding BMI</h3>
+            <p>Body Mass Index (BMI) is a measure of body fat based on height and weight. While it's a useful screening tool, it doesn't directly measure body fat or overall health.</p>
+            <div class="bmi-categories">
+                <div class="category-item">
+                    <span class="dot yellow"></span>
+                    <span>Underweight: BMI less than 18.5</span>
+                </div>
+                <div class="category-item">
+                    <span class="dot green"></span>
+                    <span>Normal: BMI 18.5 to 24.9</span>
+                </div>
+                <div class="category-item">
+                    <span class="dot orange"></span>
+                    <span>Overweight: BMI 25 to 29.9</span>
+                </div>
+                <div class="category-item">
+                    <span class="dot red"></span>
+                    <span>Obese: BMI 30 or greater</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

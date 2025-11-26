@@ -1,0 +1,34 @@
+I need you to build a complete, multi-page Web Application using Python (Flask) for the backend and HTML/CSS/JavaScript for the frontend. This app will serve as a portfolio piece to be shared on LinkedIn, so the User Interface must be modern, responsive, interactive, and visually stunning.
+
+**Project Structure:**
+Create a main landing page that introduces the application and provides navigation to three distinct tools.
+
+**Tech Stack:**
+- Backend: Flask (Python)
+- Frontend: HTML5, CSS3 (use a modern framework like Tailwind CSS or custom high-quality CSS), and JavaScript for interactivity.
+- Design Style: Modern, clean, "Dark Mode" aesthetic or a professional color palette. Use nice typography and hover effects.
+
+**The Three Tools (Requirements):**
+
+1. **BMI Calculator:**
+   - Inputs: Weight (kg) and Height (cm/m).
+   - Logic: Calculate BMI using the standard formula.
+   - Output: Display the BMI score and the category (Underweight, Normal, Overweight, Obese).
+   - UI: Use a card-based layout. When the result is shown, use color coding (e.g., Green for Normal, Red for Obese).
+
+2. **Life in Weeks Program:**
+   - Inputs: Current Age or Date of Birth.
+   - Logic: Assume a lifespan of 90 years. Calculate how many weeks the user has lived and how many weeks they have left.
+   - UI: Create a visual representation (like a progress bar or a dynamic grid) showing "Weeks Used" vs "Weeks Left". It should look impactful to remind the user to value their time.
+
+3. **Password Generator:**
+   - Inputs: Desired Length (slider 8-32), Checkboxes for "Include Numbers", "Include Symbols", "Include Uppercase".
+   - Logic: Generate a secure random password in Python based on the selected criteria.
+   - UI: A clean input interface with a large display for the generated password and a "Copy to Clipboard" button.
+
+**Additional Features:**
+- A navigation bar that is present on all pages.
+- A "Home" button to return to the landing page.
+- Make sure the app is mobile-responsive.
+
+Please write the full code, including the Flask routes (`app.py`) and the HTML templates. Ensure the app runs without errors.

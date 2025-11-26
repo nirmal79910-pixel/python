@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}Portfolio Tools - Home{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <h1 class="hero-title">
+            <span class="gradient-text">Powerful Tools</span>
+            <br>for Everyday Use
+        </h1>
+        <p class="hero-subtitle">
+            A collection of beautifully crafted utilities designed to help you with health tracking, 
+            life planning, and security. Built with modern technologies and attention to detail.
+        </p>
+        <a href="#tools" class="cta-button">
+            Explore Tools
+            <span class="arrow">&#8595;</span>
+        </a>
+    </div>
+    <div class="hero-decoration">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
+    </div>
+</section>
+
+<section id="tools" class="tools-section">
+    <h2 class="section-title">Featured Tools</h2>
+    <div class="tools-grid">
+        <a href="{{ url_for('bmi') }}" class="tool-card">
+            <div class="tool-icon bmi-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2v20M2 12h20"/>
+                    <circle cx="12" cy="12" r="10"/>
+                </svg>
+            </div>
+            <h3>BMI Calculator</h3>
+            <p>Calculate your Body Mass Index and understand your health status with visual feedback and recommendations.</p>
+            <span class="tool-link">Calculate Now <span class="arrow">&#8594;</span></span>
+        </a>
+
+        <a href="{{ url_for('life_weeks') }}" class="tool-card">
+            <div class="tool-icon life-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/>
+                    <path d="M16 2v4M8 2v4M3 10h18"/>
+                </svg>
+            </div>
+            <h3>Life in Weeks</h3>
+            <p>Visualize your life in weeks. See how much time you've spent and how much you have left to make it count.</p>
+            <span class="tool-link">Visualize Now <span class="arrow">&#8594;</span></span>
+        </a>
+
+        <a href="{{ url_for('password') }}" class="tool-card">
+            <div class="tool-icon password-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2"/>
+                    <path d="M7 11V7a5 5 0 0110 0v4"/>
+                </svg>
+            </div>
+            <h3>Password Generator</h3>
+            <p>Generate secure, random passwords with customizable length and character options. Stay safe online.</p>
+            <span class="tool-link">Generate Now <span class="arrow">&#8594;</span></span>
+        </a>
+    </div>
+</section>
+
+<section class="features-section">
+    <div class="features-grid">
+        <div class="feature">
+            <div class="feature-icon">&#9733;</div>
+            <h4>Modern Design</h4>
+            <p>Clean, intuitive interfaces built for the best user experience.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon">&#9889;</div>
+            <h4>Fast & Responsive</h4>
+            <p>Lightning-fast calculations with mobile-first responsive design.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon">&#128274;</div>
+            <h4>Privacy First</h4>
+            <p>All calculations happen locally. Your data stays with you.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}
